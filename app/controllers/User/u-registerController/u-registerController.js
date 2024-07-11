@@ -10,7 +10,6 @@ const registerController = async (req, res, next) => {
             message: "provide name email password"
         });
     };
-    const ip = req.ip;
     const formattedPassword = await bcrypt.hash(password, 10);
 
     // console.log(formattedPassword)
@@ -22,13 +21,14 @@ const registerController = async (req, res, next) => {
         return res.status(400).json(errors.mapped());
     };
     try {
-        const result = await userRegisterService({ name, email, password: formattedPassword ,ip});
+        const result = await userRegisterService({ name, email, password: formattedPassword});
         // console.log(result);
         res.status(201).json({
             code: 201,
             message: "user register successfully"
         });
     } catch (e) {
+        console.log(e)
         next(e);
     };
 };
