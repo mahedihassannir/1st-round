@@ -21,7 +21,9 @@ const registerSchema = new Schema({
         required: [true, 'Password is required'],
         minlength: [6, 'Password must be at least 6 characters long']
     },
-    
+    resetToken: String,
+    resetTokenExpiry: Date
+
 }, { timestamps: true });
 
 const registerModel = model("Users", registerSchema);
